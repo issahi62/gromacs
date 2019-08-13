@@ -1,0 +1,49 @@
+;
+;	File 'topol.top' was generated
+;	By user: unknown (1000)
+;	On host: mabel-300E5E-300E4E-300E5V-300E4V
+;	At date: Sat Apr 22 12:17:27 2017
+
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	                 :-) GROMACS - gmx pdb2gmx, VERSION 5.1.2 (-:
+;	
+;	Executable:   /usr/bin/gmx
+;	Data prefix:  /usr
+;	Command line:
+;	  gmx pdb2gmx -f s100b.pdb -water tip3p
+;	Force field was read from the standard GROMACS share directory.
+;
+
+; Include forcefield parameters
+#include "oplsaa.ff/forcefield.itp"
+
+; Include chain topologies
+#include "topol_Protein_chain_A.itp"
+#include "topol_Ion_chain_A2.itp"
+
+; Include water topology
+#include "oplsaa.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "oplsaa.ff/ions.itp"
+
+[ system ]
+; Name
+PROTEIN S100-B; 5 CALCIUM-BINDING PROTEIN B; ADVANCED GLYCOSYLATION END PRODUCT-SPECIFIC RECEPTOR in water
+
+[ molecules ]
+; Compound        #mols
+Protein_chain_A     1
+Ion_chain_A2        1
+SOL         580
+NA               9
